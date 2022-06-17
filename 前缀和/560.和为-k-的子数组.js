@@ -33,20 +33,48 @@
  * @param {number} k
  * @return {number}
  */
+// var subarraySum = function (nums, k) {
+//   const preSum = [0];
+//   for (let i = 0; i < nums.length; i++) {
+//     preSum[i + 1] = preSum[i] + nums[i];
+//   }
+//   let res = 0;
+//   for (let left = 0; left < preSum.length - 1; left++) {
+//     for (let right = left + 1; right < preSum.length; right++) {
+//       const val = preSum[right] - preSum[left];
+//       if (val === k) {
+//         res++;
+//       }
+//     }
+//   }
+//   return res;
+// };
 var subarraySum = function (nums, k) {
-  const preSum = [0];
-  for (let i = 0; i < nums.length; i++) {
-    preSum[i + 1] = preSum[i] + nums[i];
-  }
-  let res = 0;
-  for (let left = 0; left < preSum.length - 1; left++) {
-    for (let right = left + 1; right < preSum.length; right++) {
-      const val = preSum[right] - preSum[left];
-      if (val === k) {
-        res++;
-      }
+  const map = new Map();
+  map.set(0, 1);
+  let sum = 0;
+  let count = 0;
+
+  for (const num of nums) {
+    sum += num;
+    if (map.has(sum - k)) {
+      count += map.get(sum - k);
+    }
+
+    if (map.has(sum)) {
+      map.set(sum, map.get(sum) + 1);
+    } else {
+      map.set(sum, 1);
     }
   }
-  return res;
+
+  return count;
 };
 // @lc code=end
+/* 
+  思路: 
+    子数组和为 k, 则 preSum[right+1] - preSum[left] = k, 所以 preSum[left] = preSum[right+] - k
+    所以最终是要获取 前面的某前缀和 = 当前前缀和 - k 的个数
+    所以在遍历时，将每次的前缀和存入map, 前缀和作为key, value为 当前前缀和出现的次数 
+      每次计算 当前前缀和 - k = 目标前缀和target, 如果 map[target] 存在，则累计次数。
+*/
