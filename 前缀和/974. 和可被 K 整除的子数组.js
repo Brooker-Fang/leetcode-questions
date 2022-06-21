@@ -69,20 +69,22 @@
  *[0,-1,1,10]
  */
 var subarraysDivByK = function (nums, k) {
-  const map = { 0: 1 };
+  const map = new Map([[0, 1]]);
+  let preSum = 0;
   let count = 0;
-  let preNum = 0;
-  for (let i = 0; i < nums.length; i++) {
-    preNum += nums[i];
-    let preNumModK = preNum % k;
-    if (preNumModK < 0) {
-      preNumModK += k;
+  const len = nums.length;
+  for (let i = 0; i < len; i++) {
+    preSum += nums[i];
+    let preSumModK = preSum % k;
+    if (preSumModK < 0) {
+      preSumModK += k;
     }
-    if (map[preNumModK]) {
-      count += map[preNumModK];
-      map[preNumModK]++;
+    if (map.has(preSumModK)) {
+      const val = map.get(preSumModK);
+      count += val;
+      map.set(preSumModK, val + 1);
     } else {
-      map[preNumModK] = 1;
+      map.set(preSumModK, 1);
     }
   }
   return count;
