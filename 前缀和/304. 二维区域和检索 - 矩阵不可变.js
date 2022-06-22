@@ -83,6 +83,8 @@
  *  [0,13,22,26,34,49],
  *  [0,14,23,30,38,58]]
  * 计算[x,y,x2,y2]区域的元素和 = preNum[x2+1,y2+1] - preNum[x, y2+1] - preNum[x2+1, y] + preNum[x,y]
+ *
+ * https://leetcode.cn/problems/range-sum-query-2d-immutable/
  */
 let preSum = [[]];
 var NumMatrix = function (matrix) {
