@@ -67,6 +67,20 @@
  * @param {string} s
  * @param {string} t
  * @return {string}
+ * s = "ADOBECODEBANC",
+ * t = "ABC"
+ * 思路：
+ *   初始化need 和 window 两个map，need保存子串需要的字符和数量，window保存窗口里的字符和数量
+ *   初始化valid，valid保存 窗口中有几个字符的数量 和 子串map中相同字符的数量一致，
+ *   当valid = 子串map的大小时，说明当前窗口已经满足 子串的条件，左窗口可以开始滑动
+ *   初始化start，len，start记录满足条件的索引，len记录满足条件的子串长度
+ *   窗口右滑，如果当前字符 是子串map中的字符，则向窗口window添加新字符数量置为1或者将window原有字符数量+1，
+ *   如果window中当前字符的数量 = 子串map中字符的数量，则valid+1
+ *   如果valid = 子串map的大小时，
+ *      记录当前左窗口的位置 到start 和 当前窗口的的长度到len，
+ *      左窗口开始滑动，如果左窗口所在的字符 为子串need需要的字符，并且need中的数量与窗口window中的数量一致，则valid-1
+ *      更新窗口window中 当前字符的数量-1
+ *   最后通过start和len 获取最小覆盖子串
  */
 var minWindow = function (s, t) {
   const need = {},

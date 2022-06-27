@@ -82,7 +82,7 @@ var checkInclusion = function (s1, s2) {
         valid++;
       }
     }
-    if (right - left >= s1.length) {
+    while (right - left >= s1.length) {
       if (valid === needLen) {
         return true;
       }
@@ -98,5 +98,4 @@ var checkInclusion = function (s1, s2) {
   }
   return false;
 };
-checkInclusion('ab', 'eibbaooo');
 // @lc code=end
