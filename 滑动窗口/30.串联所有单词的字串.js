@@ -67,6 +67,7 @@
  * 思路：
  *  从0-n（单词的长度）不同的起始位置做滑动窗口，即需要做 n（单词的长度） 次滑动窗口
  *   每次滑动窗口 都以n为单位滑动
+ * 时间复杂度 = 单词的长度 x 字符串的长度 O(baseLen * sLen)
  */
 var findSubstring = function (s, words) {
   const index = [];
